@@ -5,6 +5,7 @@ Web Api: RestFUL Api
 Databse: PostgreSQL
 
 VALIDATIONS:
+    
     Worker: 
         Required Fields: Name, Email, Phone, Salary, Joining Date
         
