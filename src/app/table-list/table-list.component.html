@@ -1,0 +1,72 @@
+<div class="main-content">
+      <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  
+                  <div class="card-header card-header-danger">
+                      <h3 class="card-title "><b>Workers</b></h3>
+                      <h4 class="card-category"><b> Workers Information</b></h4>
+                  </div>
+
+                  <div class="card-body">
+                    <div class="form-group form-black is-empty">
+                        <input type="text" class="form-control" placeholder="Search Workers" [(ngModel)]="searchText">
+                        <span class="material-input"></span>
+                    </div>
+                    
+                      <div class="table-responsive">
+                          <label *ngIf="isLoading">Loading...</label>
+                          <table class="table"  *ngIf="!isLoading">
+                              <thead class=" text-primary">
+                                  <th>
+                                      ID
+                                  </th>
+                                  <th>
+                                      Name
+                                  </th>
+                                  <th>
+                                      Phone
+                                  </th>
+                                  <th>
+                                      Email
+                                  </th>
+                                  <th>
+                                      Salary
+                                  </th>
+                                  <th>
+                                      Joining Date
+                                  </th>
+                              </thead>
+                              <tbody *ngFor='let worker of workers$ | filter:searchText' >
+                                  <!-- <tr class="clickable" [routerLink]="['/user-profile/',worker.workerId]"> -->
+                                    <tr class="clickable" (click)="onClick(worker.workerId)">
+                                      <td>
+                                          {{worker.workerId}}
+                                      </td>
+                                      <td>
+                                          {{worker.workerName}}
+                                      </td>
+                                      <td>
+                                        {{worker.workerPhone}}
+                                      </td>
+                                      <td>
+                                        {{worker.workerEmail}}
+                                      </td>
+                                      <td class="text-primary">
+                                        ${{worker.workerSalary}}
+                                      </td>
+                                      <td>
+                                        {{worker.workerJoiningDate}}
+                                      </td>
+                                    </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          
+      </div>
+  </div>
+</div>

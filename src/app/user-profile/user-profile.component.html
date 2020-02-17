@@ -1,0 +1,107 @@
+<div class="main-content">
+  
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-8">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                    <h3 class="card-title "><b>{{this.action}} Worker Profile</b></h3>
+                    <h4 class="card-category"><b> Worker Data </b></h4>
+                  </div>
+                  <div class="card-body">
+                    <label *ngIf="isLoading">Loading...</label>
+                      <form #workerForm="ngForm" *ngIf="!isLoading">
+                          <div class="row">
+                              <div class="col-md-5">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Worker Id" value={{worker$.workerId}} disabled>
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-3">
+                                  <mat-form-field class="example-full-width">
+                                    <input required matInput placeholder="Name" name="worker$.workerName" [(ngModel)]=worker$.workerName>
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input required matInput placeholder="Email address" type="email" name="worker$.workerEmail" [(ngModel)]=worker$.workerEmail>
+                                  </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput required minlength="10" placeholder="Phone" type="number" name="worker$.workerPhone" [(ngModel)]=worker$.workerPhone>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput required placeholder="Salary" type="number" name="worker$.workerSalary" [(ngModel)]="worker$.workerSalary">
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <!-- <div class="row">
+                              <div class="col-md-12">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Address" type="text">
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="City" type="text">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Country" type="text">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Postal Code" type="text">
+                                </mat-form-field>
+                              </div>
+                          </div> -->
+                          <div class="row">
+                              <div class="col-md-12">
+                                <label>Joining Date</label>
+                                <mat-form-field class="example-full-width">
+                                  <input required matInput type="date" name="worker$.workerJoiningDate" [(ngModel)]="worker$.workerJoiningDate">
+                                 </mat-form-field>
+                                  <!-- <div class="form-group">
+
+                                      <div class="form-group">
+                                          <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
+                                          <textarea class="form-control" rows="5"></textarea>
+                                      </div>
+                                  </div> -->
+                              </div>
+                          </div>
+                          <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="onUpdate()" [disabled]="!workerForm.dirty || workerForm.invalid || invalidForm()">{{this.action}} Profile</button>
+                          <div class="clearfix"></div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="card card-profile">
+                  <div class="card-avatar">
+                      <a href="javascript:void(0)">
+                          <img class="img" src="./assets/img/faces/marc.jpg" />
+                      </a>
+                  </div>
+                  <div class="card-body">
+                      <h6 class="card-category text-gray">Worker</h6>
+                      <h4 class="card-title">{{worker$.workerName}}</h4>
+                      <p class="card-description">
+                          Worker Description
+                      </p>
+                      <!-- <a href="javascript:void(0)" class="btn btn-danger btn-round">Follow</a> -->
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,176 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12" >
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                    <h3 class="card-title "><b>{{this.action}} Sale </b></h3>
+                    <h4 class="card-category"><b> Sale Data </b></h4>
+                  </div>
+                  <div class="card-body">
+                    <label *ngIf="isLoading">Loading...</label>
+                      <form *ngIf="!isLoading" #saleForm="ngForm">
+                          <div class="row">
+                              <div class="col-md-5">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Sale Id" value={{sale$.saleId}} disabled>
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-3">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput required [disabled]="sale$.billed" placeholder="Customer Name" name="sale$.customerName" [(ngModel)]=sale$.customerName>
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput  [disabled]="sale$.billed" placeholder="Customer Email" type="email" name="sale$.customerEmail" [(ngModel)]=sale$.customerEmail>
+                                  </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput required [disabled]="sale$.billed" placeholder="Customer Phone" type="number" name="sale$.customerPhone" [(ngModel)]=sale$.customerPhone>
+                                </mat-form-field>
+                              </div>
+                              
+                          </div>
+                          <!-- <div class="row">
+                              <div class="col-md-12">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Address" type="text">
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="City" type="text">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Country" type="text">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Postal Code" type="text">
+                                </mat-form-field>
+                              </div>
+                          </div> -->
+                          <div class="row">
+                              <div class="col-md-4">
+                                <label>Sale Date</label>
+                                <mat-form-field class="example-full-width">
+                                  <input required [disabled]="sale$.billed" matInput type="date" name="sale$.saleDate" [(ngModel)]="sale$.saleDate">
+                                 </mat-form-field>
+                                 
+                              </div>
+                              <div class="col-md-12"><hr></div>
+                              <div class="col-md-12">
+                                <mat-accordion>
+                                  <mat-expansion-panel>
+                                    <mat-expansion-panel-header>
+                                      <mat-panel-title>
+                                        Job Information
+                                      </mat-panel-title>
+                                      <mat-panel-description>
+                                        Select Job
+                                      </mat-panel-description>
+                                    </mat-expansion-panel-header>
+                                
+                                    <mat-form-field class="example-full-width">
+                                      <input required [attr.disabled]="sale$.billed" type="text" placeholder="Job List" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                                      <mat-autocomplete #auto="matAutocomplete" (optionSelected)='onJobChange($event.option.value)'>
+                                        <mat-option *ngFor="let option of jobOptions" [value]="option">
+                                          {{option}}
+                                        </mat-option>
+                                      </mat-autocomplete>
+                                    </mat-form-field>
+                                
+
+                                  </mat-expansion-panel></mat-accordion>
+                              </div>
+                              <div class="col-md-12"><hr></div>
+                              <div class="col-md-12" >
+                                <mat-accordion>
+                                  <mat-expansion-panel>
+                                    <mat-expansion-panel-header>
+                                      <mat-panel-title>
+                                        Sale Information
+                                      </mat-panel-title>
+                                      <mat-panel-description>
+                                        Select Products
+                                      </mat-panel-description>
+                                    </mat-expansion-panel-header>
+                                    <div *ngFor="let obj of currentSaleData; let i=index">
+                                    <div class="col-md-12">
+                                      <mat-form-field class="example-full-width">
+                                        <input  required [disabled]="sale$.billed" type="text" placeholder="Item List" aria-label="Number" matInput [(ngModel)]="obj.someString" name="invSomeString{{i}}" [matAutocomplete]="autos" >
+                                        <mat-autocomplete #autos="matAutocomplete" (optionSelected)='onItemChange($event.option.value)' >
+                                          <mat-option *ngFor="let option of itemOptions" [value]="option">
+                                            {{option}}
+                                          </mat-option>
+                                        </mat-autocomplete>
+                                      </mat-form-field>
+                                    </div>
+                                    <div class="col-md-2">
+                                      <mat-form-field class="example-full-width">
+                                        <input (focus)="getOldQty(i)" required [disabled]="sale$.billed" (change)="onQtyChange()" matInput placeholder="Qty" type="number" name="invItemQty{{i}}" [(ngModel)]="obj.qty">
+                                      </mat-form-field>
+                                      <!-- <label>hi</label> -->
+                                      <button  [disabled]="sale$.billed" mat-raised-button class="btn btn-danger pull-left" (click)="onRemoveDiv(i)">X</button>
+                                    </div>
+                                  </div>
+                                    <button [disabled]="sale$.billed" mat-raised-button class="btn btn-success pull-left" (click)="onAddDiv()">+</button>
+                                  </mat-expansion-panel></mat-accordion>
+                              </div>
+                              
+                          </div>
+                          <div class="col-md-12"><hr></div>
+                          <div class="row">
+                            <div class="col-md-3">
+                              <mat-form-field class="example-full-width">
+                                <input min="0" required [disabled]="sale$.billed" (change)="onQtyChange(0)" matInput placeholder="Discount" type="number" name="sale$.discount" [(ngModel)]=sale$.discount >
+                                	
+                              </mat-form-field>
+
+                            </div>
+                            <div class="col-md-3">
+                              <mat-form-field class="example-full-width">
+                                <input min="0" required [disabled]="sale$.billed" matInput placeholder="Total" type="number" name="sale$.saleTotal" [(ngModel)]=sale$.saleTotal>
+                              </mat-form-field>
+                            </div>
+                        </div>
+                        <!-- <button mat-raised-button class="btn btn-danger pull-right" >Bill</button> -->
+                        <button mat-raised-button [disabled]="!saleForm.dirty || saleForm.invalid || invalidForm()" *ngIf="!sale$.billed && action=='Update'" class="btn btn-danger pull-right" (click)="print(sale$.saleId)">Bill</button>
+                        <button mat-raised-button [disabled]="!saleForm.dirty || saleForm.invalid || invalidForm()" *ngIf="!sale$.billed" type="submit" class="btn btn-danger pull-right" (click)="onUpdate()">{{this.action}} Sale</button>
+                        <button mat-raised-button *ngIf="sale$.billed" type="submit" class="btn btn-danger pull-right" (click)="bill(sale$.saleId)">Check Bill</button>
+                          <div class="clearfix"></div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+          <!-- <div class="col-md-5">
+              <div class="card card-profile">
+                  <div class="card-avatar">
+                      <a href="javascript:void(0)">
+                          <img class="img" src="./assets/img/faces/marc.jpg" />
+                      </a>
+                  </div>
+                  <div class="card-bod col-md-5y">
+                      <h6 class="card-category text-gray">Customer</h6>
+                      <h4 class="card-title">{{sale$.customerName}}</h4>
+                       
+                      <h6 class="card-category text-gray">Job</h6>
+                      <h4 class="card-title">Job Details</h4>
+                      <h6 class="card-category text-gray">Products</h6>
+                      <h4 class="card-title">Sales Details</h4>
+                      <a href="javascript:void(0)" class="btn btn-danger btn-round">Follow</a>
+                  </div>
+              </div>
+          </div> -->
+      </div>
+  </div>
+</div>

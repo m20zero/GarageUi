@@ -1,0 +1,127 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                    <h3 class="card-title "><b>{{this.action}} Inventory</b></h3>
+                    <h4 class="card-category"><b> Inventory Data </b></h4>
+                  </div>
+                  <div class="card-body">
+                    <label *ngIf="isLoading">Loading...</label>
+                      <form *ngIf="!isLoading" #inventoryForm="ngForm">
+                          <div class="row">
+                              <div class="col-md-1">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Item Id" value={{inventory$.id}} disabled>
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput required placeholder="Item Name" name="inventory$.itemName" [(ngModel)]=inventory$.itemName>
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput required placeholder="Item No" type="text" name="inventory$.itemNumber" [(ngModel)]=inventory$.itemNumber>
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput required placeholder="Item Company" type="text" name="inventory$.itemCompany" [(ngModel)]=inventory$.itemCompany>
+                                </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input type="text" required placeholder="Item Type" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                                  <mat-autocomplete #auto="matAutocomplete">
+                                    <mat-option *ngFor="let option of options" [value]="option">
+                                      {{option}}
+                                    </mat-option>
+                                  </mat-autocomplete>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Car Brand" type="text" name="inventory$.carBrand" [(ngModel)]="inventory$.carBrand">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Car Model" type="text" name="inventory$.carModel" [(ngModel)]="inventory$.carModel">
+                                </mat-form-field>
+                              </div>
+
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput  required placeholder="Purchase Price" type="number" name="inventory$.itemPuchasePrice" [(ngModel)]="inventory$.itemPuchasePrice">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput required placeholder="Selling Price" type="number" name="inventory$.itemSellingPrice" [(ngModel)]="inventory$.itemSellingPrice">
+                                </mat-form-field>
+                              </div>
+
+                              <div class="col-md-2">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput required placeholder="Quantity" type="number" name="inventory$.itemQty" [(ngModel)]="inventory$.itemQty">
+                                </mat-form-field>
+                              </div>
+
+                              <div class="col-md-2">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Rack No" type="text" name="inventory$.rackNo" [(ngModel)]="inventory$.rackNo">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                  <input required type="text" placeholder="Vendor" aria-label="Number" matInput [formControl]="myControl1" [matAutocomplete]="autos">
+                                  <mat-autocomplete #autos="matAutocomplete">
+                                    <mat-option *ngFor="let option of vendors" [value]="option">
+                                      {{option}}
+                                    </mat-option>
+                                  </mat-autocomplete>
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <div class="form-group">
+
+                                      <div class="form-group">
+                                          <label class="bmd-label-floating"> Item Description</label>
+                                          <textarea class="form-control" rows="5" [(ngModel)]="inventory$.itemDesc" name="inventory$.itemDesc"></textarea>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="onUpdate()" [disabled]="!inventoryForm.dirty || inventoryForm.invalid || invalidForm()">{{this.action}} Item</button>
+                          <div class="clearfix"></div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+          <!-- <div class="col-md-4">
+              <div class="card card-profile">
+                  <div class="card-avatar">
+                      <a href="javascript:void(0)">
+                          <img class="img" src="./assets/img/faces/marc.jpg" />
+                      </a>
+                  </div>
+                  <div class="card-body">
+                      <h6 class="card-category text-gray">Worker</h6>
+                      <h4 class="card-title">{{worker$.workerName}}</h4>
+                      <p class="card-description">
+                          Worker Description
+                      </p>
+                      <a href="javascript:void(0)" class="btn btn-danger btn-round">Follow</a>
+                  </div>
+              </div>
+          </div> -->
+      </div>
+  </div>
+</div>

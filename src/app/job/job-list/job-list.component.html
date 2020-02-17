@@ -1,0 +1,234 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h3 class="card-title "><b>Jobs</b></h3>
+                      <h4 class="card-category"><b> Jobs Information</b></h4>
+                  </div>
+                  <div class="card-body">
+                    <div class="form-group form-black is-empty">
+                        <input type="text" class="form-control" placeholder="Search Jobs" [(ngModel)]="searchText">
+                        <span class="material-input"></span>
+                    </div>
+                      <div class="table-responsive">
+                          <label *ngIf="isLoading">Loading...</label>
+                          <table class="table" *ngIf="!isLoading">
+                              <thead class=" text-primary">
+                                  <th>
+                                      ID
+                                  </th>
+                                  <th>
+                                      Start Date
+                                  </th>
+                                  <th>
+                                      End Date
+                                  </th>
+                                  <th>
+                                      Customer Name
+                                  </th>
+                                  <th>
+                                      Customer Phone
+                                  </th>
+                                  <th>
+                                      Description
+                                  </th>
+                                  <th>
+                                    Status
+                                </th>
+                                  <th>
+                                    Car
+                                </th>
+                                <th>
+                                    Brand & Model
+                                </th>
+                                  <th>
+                                    Total
+                                </th>
+                              </thead>
+                              <tbody *ngFor='let job of jobs$ | filter:searchText'>
+                                  <!-- <tr class="clickable" [routerLink]="['/user-profile/',worker.workerId]"> -->
+                                    <tr class="clickable" (click)="onClick(job.jobId)">
+                                        <td>
+                                            {{job.jobId}}
+                                        </td>
+                                        <td>
+                                          {{job.jobStartDate}}
+                                      </td>
+                                      <td>
+                                        {{job.jobEndDate}}
+                                    </td>
+                                      <td>
+                                          {{job.customerName}}
+                                      </td>
+                                      <td>
+                                        {{job.customerPhone}}
+                                      </td>
+                                      <td style="
+                                      overflow: hidden;
+                                      width: 180px;
+                                      height: 30px;
+                                      text-overflow: ellipsis; ">
+                                        {{job.jobDescription}}
+                                      </td>
+                                      <td *ngIf="job.jobStatus=='Pending'" class="text-danger">
+                                        {{job.jobStatus}}
+                                      </td>
+                                      <td *ngIf="job.jobStatus=='Completed'" class="text-success">
+                                        {{job.jobStatus}}
+                                      </td>
+                                      <td>
+                                        {{job.carNo}}
+                                      </td>
+                                      <td>
+                                            {{job.carBrand}} {{job.carModel}}
+                                      </td>
+                                      <td class="text-primary">
+                                        {{job.bill}}
+                                      </td>
+                                    </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- <div class="col-md-12">
+              <div class="card card-plain">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title mt-0"> Table on Plain Background</h4>
+                      <p class="card-category"> Here is a subtitle for this table</p>
+                  </div>
+                  <div class="card-body">
+                      <div class="table-responsive">
+                          <table class="table table-hover">
+                              <thead class="">
+                                  <th>
+                                      ID
+                                  </th>
+                                  <th>
+                                      Name
+                                  </th>
+                                  <th>
+                                      Country
+                                  </th>
+                                  <th>
+                                      City
+                                  </th>
+                                  <th>
+                                      Salary
+                                  </th>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td>
+                                          1
+                                      </td>
+                                      <td>
+                                          Dakota Rice
+                                      </td>
+                                      <td>
+                                          Niger
+                                      </td>
+                                      <td>
+                                          Oud-Turnhout
+                                      </td>
+                                      <td>
+                                          $36,738
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          2
+                                      </td>
+                                      <td>
+                                          Minerva Hooper
+                                      </td>
+                                      <td>
+                                          Curaçao
+                                      </td>
+                                      <td>
+                                          Sinaai-Waas
+                                      </td>
+                                      <td>
+                                          $23,789
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          3
+                                      </td>
+                                      <td>
+                                          Sage Rodriguez
+                                      </td>
+                                      <td>
+                                          Netherlands
+                                      </td>
+                                      <td>
+                                          Baileux
+                                      </td>
+                                      <td>
+                                          $56,142
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          4
+                                      </td>
+                                      <td>
+                                          Philip Chaney
+                                      </td>
+                                      <td>
+                                          Korea, South
+                                      </td>
+                                      <td>
+                                          Overland Park
+                                      </td>
+                                      <td>
+                                          $38,735
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          5
+                                      </td>
+                                      <td>
+                                          Doris Greene
+                                      </td>
+                                      <td>
+                                          Malawi
+                                      </td>
+                                      <td>
+                                          Feldkirchen in Kärnten
+                                      </td>
+                                      <td>
+                                          $63,542
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          6
+                                      </td>
+                                      <td>
+                                          Mason Porter
+                                      </td>
+                                      <td>
+                                          Chile
+                                      </td>
+                                      <td>
+                                          Gloucester
+                                      </td>
+                                      <td>
+                                          $78,615
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div> -->
+      </div>
+  </div>
+</div>
