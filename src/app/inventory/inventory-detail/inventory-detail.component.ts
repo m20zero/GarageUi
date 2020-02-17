@@ -70,8 +70,7 @@ export class InventoryDetailComponent implements OnInit {
       this.inventory$.itemPuchasePrice < 0 || 
       this.inventory$.itemQty <= 0 || 
       this.inventory$.itemSellingPrice < 0 ||
-      this.inventory$.itemPuchasePrice > this.inventory$.itemSellingPrice ||
-      this.inventory$.itemQty < 0
+      this.inventory$.itemPuchasePrice > this.inventory$.itemSellingPrice
       ){
       return true;
     }

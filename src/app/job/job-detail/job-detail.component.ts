@@ -62,15 +62,18 @@ export class JobDetailComponent implements OnInit {
   invalidForm(){
     var nameRegex = /^[A-Za-z ]+$/;
     var numRegex = /^((\+)?(\d{2}[-]))?(\d{10,15}){1}?$/;
+    var numbersOnlyRegex = /^[0-9]*$/;
     
     if(
       this.job$.customerName.trim().length <=0 ||
       this.job$.customerEmail.trim().length <= 0 || 
       (this.job$.customerPhone+"").trim().length <= 0 ||
       this.job$.customerAddress.trim().length <= 0 ||
+      !(this.job$.bill+"").match(numbersOnlyRegex) ||
       this.job$.carNo.trim().length <= 0 ||
       this.job$.jobStartDate > this.job$.jobEndDate ||
-      !this.job$.customerName.match(nameRegex)){
+      !this.job$.customerName.match(nameRegex) || 
+      !this.job$.customerPhone.match(numRegex)){
       return true;
     }
     

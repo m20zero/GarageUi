@@ -16,6 +16,6 @@ export class Job{
 	customerAddress: string="";
 	jobDescription: string="";
 	jobStatus: string="";
-	bill: number;
+	bill: number=0;
 	workerId: string;
 }

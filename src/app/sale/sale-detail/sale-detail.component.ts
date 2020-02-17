@@ -104,9 +104,15 @@ export class SaleDetailComponent implements OnInit {
   }
 
   invalidForm(){
+    var numRegex = /^((\+)?(\d{2}[-]))?(\d{10,15}){1}?$/;
+    var nameRegex = /^[A-Za-z ]+$/;
+    var emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if(
       this.sale$.discount < 0 || 
-      this.sale$.customerName.trim().length <= 0)
+      this.sale$.customerName.trim().length <= 0 || 
+      !this.sale$.customerName.match(nameRegex) ||
+      !this.sale$.customerPhone.match(numRegex) ||
+      !this.sale$.customerEmail.match(emailRegex))
       {
       return true;
     }
