@@ -1,8 +1,9 @@
 TECH STACK:
-Front-End: Angular
-Back-End: Java Spring
-Web Api: RestFUL Api
-Databse: PostgreSQL
+
+    Front-End: Angular
+    Back-End: Java Spring
+    Web Api: RestFUL Api
+    Databse: PostgreSQL
 
 VALIDATIONS:
     
