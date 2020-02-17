@@ -111,7 +111,7 @@ export class SaleDetailComponent implements OnInit {
       this.sale$.discount < 0 || 
       this.sale$.customerName.trim().length <= 0 || 
       !this.sale$.customerName.match(nameRegex) ||
-      !this.sale$.customerPhone.match(numRegex) ||
+      !(this.sale$.customerPhone+"").match(numRegex) ||
       !this.sale$.customerEmail.match(emailRegex))
       {
       return true;
@@ -193,10 +193,6 @@ export class SaleDetailComponent implements OnInit {
         }else{
           this.tempInventoryList[i].itemQty = this.tempInventoryList[i].itemQty*1 + this.oldQty[i]*1 - this.currentSaleData[i].qty*1;
         }
-        
-       
-        
-        
         // console.log(this.tempInventoryList[i].itemQty);
         this.dataService.updateInventory(this.tempInventoryList[i]).subscribe(data=>{
           this.updateInventoryResponse = data;
