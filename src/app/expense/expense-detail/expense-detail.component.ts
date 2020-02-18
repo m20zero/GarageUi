@@ -45,11 +45,34 @@ export class ExpenseDetailComponent implements OnInit {
       
     }
   }
+
+  invalidTitle(){
+    if( this.expense$.expenseTitle.trim().length <= 0){
+        return true;
+    }
+    return false;
+  }
+
+  invalidAmount(){
+    if( this.expense$.expenseAmount <= 0){
+        return true;
+    }
+    return false;
+  }
+
+  invalidForm(){
+    if(
+      this.invalidTitle() ||
+      this.invalidAmount()
+      ){
+      return true;
+    }
+  }
   
-  onUpdate(updateExpense$: Expense){
-    updateExpense$.expenseType = this.myControl.value;
+  onUpdate(){
+    this.expense$.expenseType = this.myControl.value;
     if(this.action == "Add"){
-      this.dataService.addExpense(updateExpense$).subscribe(
+      this.dataService.addExpense(this.expense$).subscribe(
         data => {
           this.updateExpenseResponse = data;
           if(this.updateExpenseResponse.msg == 'OK'){
@@ -61,7 +84,7 @@ export class ExpenseDetailComponent implements OnInit {
         }
       );
     }else{
-      this.dataService.updateExpense(updateExpense$).subscribe(
+      this.dataService.updateExpense(this.expense$).subscribe(
         data => {
           this.updateExpenseResponse = data;
           if(this.updateExpenseResponse.msg == 'OK'){

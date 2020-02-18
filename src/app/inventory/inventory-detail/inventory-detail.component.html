@@ -18,18 +18,33 @@
                               </div>
                               <div class="col-md-4">
                                   <mat-form-field class="example-full-width">
-                                    <input matInput required placeholder="Item Name" name="inventory$.itemName" [(ngModel)]=inventory$.itemName>
+                                    <input #itemName="ngModel" matInput required placeholder="Item Name" name="inventory$.itemName" [(ngModel)]=inventory$.itemName>
                                   </mat-form-field>
+                                  <div *ngIf="(itemName.dirty || itemName.touched)" class="text-danger">
+                                    <div *ngIf="invalidItemName()">
+                                      Invalid Item Name.
+                                    </div>
+                                  </div>
                               </div>
                               <div class="col-md-4">
                                   <mat-form-field class="example-full-width">
-                                    <input matInput required placeholder="Item No" type="text" name="inventory$.itemNumber" [(ngModel)]=inventory$.itemNumber>
+                                    <input #itemNo="ngModel" matInput required placeholder="Item No" type="text" name="inventory$.itemNumber" [(ngModel)]=inventory$.itemNumber>
                                   </mat-form-field>
+                                  <div *ngIf="(itemNo.dirty || itemNo.touched)" class="text-danger">
+                                    <div *ngIf="invalidItemNumber()">
+                                      Invalid Item No.
+                                    </div>
+                                  </div>
                               </div>
                               <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput required placeholder="Item Company" type="text" name="inventory$.itemCompany" [(ngModel)]=inventory$.itemCompany>
+                                  <input #itemCompany="ngModel" matInput required placeholder="Item Company" type="text" name="inventory$.itemCompany" [(ngModel)]=inventory$.itemCompany>
                                 </mat-form-field>
+                                <div *ngIf="(itemCompany.dirty || itemCompany.touched)" class="text-danger">
+                                  <div *ngIf="invalidItemCompany()">
+                                    Invalid Item Company.
+                                  </div>
+                                </div>
                             </div>
                           </div>
                           <div class="row">
@@ -56,19 +71,34 @@
 
                               <div class="col-md-4">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput  required placeholder="Purchase Price" type="number" name="inventory$.itemPuchasePrice" [(ngModel)]="inventory$.itemPuchasePrice">
+                                  <input matInput #purchasePrice="ngModel" required placeholder="Purchase Price" type="number" name="inventory$.itemPuchasePrice" [(ngModel)]="inventory$.itemPuchasePrice">
                                 </mat-form-field>
+                                <div *ngIf="(purchasePrice.dirty || purchasePrice.touched)" class="text-danger">
+                                  <div *ngIf="invalidPurchasePrice()">
+                                    Invalid Purchase Price.
+                                  </div>
+                                </div>
                               </div>
                               <div class="col-md-4">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput required placeholder="Selling Price" type="number" name="inventory$.itemSellingPrice" [(ngModel)]="inventory$.itemSellingPrice">
+                                  <input matInput #sellingPrice="ngModel" required placeholder="Selling Price" type="number" name="inventory$.itemSellingPrice" [(ngModel)]="inventory$.itemSellingPrice">
                                 </mat-form-field>
+                                <div *ngIf="(sellingPrice.dirty || sellingPrice.touched)" class="text-danger">
+                                  <div *ngIf="invalidSellingPrice()">
+                                    Invalid Selling Price.
+                                  </div>
+                                </div>
                               </div>
 
                               <div class="col-md-2">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput required placeholder="Quantity" type="number" name="inventory$.itemQty" [(ngModel)]="inventory$.itemQty">
+                                  <input matInput #qty="ngModel" required placeholder="Quantity" type="number" name="inventory$.itemQty" [(ngModel)]="inventory$.itemQty">
                                 </mat-form-field>
+                                <div *ngIf="(qty.dirty || qty.touched)" class="text-danger">
+                                  <div *ngIf="invalidItemQty()">
+                                    Invalid Quantity.
+                                  </div>
+                                </div>
                               </div>
 
                               <div class="col-md-2">

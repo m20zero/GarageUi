@@ -61,16 +61,59 @@ export class InventoryDetailComponent implements OnInit {
     });
     
   }
+
+  invalidItemName(){
+    if(this.inventory$.itemName.trim().length <= 0){
+      return true;
+    }
+    return false;
+  }
+
+  invalidItemNumber(){
+    if(this.inventory$.itemNumber.trim().length <= 0){
+      return true;
+    }
+    return false;
+  }
+
+  invalidItemCompany(){
+    if(this.inventory$.itemCompany.trim().length <= 0){
+      return true;
+    }
+    return false;
+  }
+
+  invalidPurchasePrice(){
+    if(this.inventory$.itemPuchasePrice < 0){
+      return true;
+    }
+    return false;
+  }
+
+  invalidSellingPrice(){
+    if(this.inventory$.itemSellingPrice < 0 ||
+      this.inventory$.itemPuchasePrice > this.inventory$.itemSellingPrice){
+      return true;
+    }
+    return false;
+  }
+
+  invalidItemQty(){
+    if(this.inventory$.itemQty <= 0){
+      return true;
+    }
+    return false;
+  }
+
   
   invalidForm(){
     if(
-      this.inventory$.itemName.trim().length <= 0 ||
-      this.inventory$.itemNumber.trim().length <= 0 ||
-      this.inventory$.itemCompany.trim().length <= 0 ||
-      this.inventory$.itemPuchasePrice < 0 || 
-      this.inventory$.itemQty <= 0 || 
-      this.inventory$.itemSellingPrice < 0 ||
-      this.inventory$.itemPuchasePrice > this.inventory$.itemSellingPrice
+      this.invalidItemName() ||
+      this.invalidItemNumber() ||
+      this.invalidItemCompany() ||
+      this.invalidPurchasePrice() || 
+      this.invalidItemQty() || 
+      this.invalidSellingPrice()
       ){
       return true;
     }
