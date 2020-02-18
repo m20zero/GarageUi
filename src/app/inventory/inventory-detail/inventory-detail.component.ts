@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from 'app/data.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StandardResponse } from 'app/Model/StandardResponse';
 import { NotificationsComponent } from 'app/notifications/notifications.component';
 import { Inventory } from '../../Model/inventory';
@@ -27,7 +27,7 @@ export class InventoryDetailComponent implements OnInit {
   inventoryId: string = this.route.snapshot.params.id?this.route.snapshot.params.id:"";
   action: string = "";
   updateInventoryResponse = new StandardResponse() ;
-  constructor(private dataService:DataService, private route:ActivatedRoute, private notis: NotificationsComponent) {
+  constructor(private router:Router, private dataService:DataService, private route:ActivatedRoute, private notis: NotificationsComponent) {
     this.updateInventoryResponse.msg = "";
   }
 
@@ -86,6 +86,7 @@ export class InventoryDetailComponent implements OnInit {
           this.updateInventoryResponse = data;
           if(this.updateInventoryResponse.msg == 'OK'){
             this.notis.showNotification('top','right','Add Success','Inventory Added Successfully','success','check');
+            this.router.navigate(['/inventory-list']);
           }
         },error =>{
           this.notis.showNotification('top','right','Add Fail','Inventory Add Failure','danger','cancel');

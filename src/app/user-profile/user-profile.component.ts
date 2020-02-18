@@ -10,6 +10,7 @@ import { NotificationsComponent } from 'app/notifications/notifications.componen
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css']
 })
+
 export class UserProfileComponent implements OnInit {
 
   isLoading: boolean = true;
@@ -38,19 +39,50 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-  invalidForm(){
+  invalidName(){
     var nameRegex = /^[A-Za-z ]+$/;
-    var numRegex = /^((\+)?(\d{2}[-]))?(\d{10,15}){1}?$/;
+    if( this.worker$.workerName.trim() == "" || 
+        !this.worker$.workerName.match(nameRegex)
+      ){
+      return true;
+    }
+    return false;
+  }
+
+  invalidEmail(){
     var emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    
+    if( this.worker$.workerEmail.trim() == "" || 
+        !this.worker$.workerEmail.match(emailRegex)
+      ){
+      return true;
+    }
+    return false;
+  }
+
+  invalidSalary(){
+    if(this.worker$.workerSalary <= 0){
+      return true;
+    }
+    return false;
+  }
+
+  invalidPhone(){
+    var numRegex = /^((\+)?(\d{2}[-]))?(\d{8,15}){1}?$/;
     if(
-      this.worker$.workerName.trim() == "" || 
-      this.worker$.workerEmail.trim()== "" || 
-      (""+this.worker$.workerPhone).trim()== "" || 
-      this.worker$.workerSalary <= 0 ||
-      !(this.worker$.workerPhone+"").match(numRegex) || 
-      !this.worker$.workerEmail.match(emailRegex) ||
-      !this.worker$.workerName.match(nameRegex) 
+        (""+this.worker$.workerPhone).trim()== "" ||   
+        !(this.worker$.workerPhone+"").match(numRegex)
+      ){
+        return true;
+    }
+    return false;
+  }
+
+  invalidForm(){
+    if(
+      this.invalidName() || 
+      this.invalidEmail() || 
+      this.invalidSalary() || 
+      this.invalidPhone()
       ){
       return true;
     }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from 'app/data.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Worker } from '../../Model/worker';
 import { StandardResponse } from 'app/Model/StandardResponse';
 import { NotificationsComponent } from 'app/notifications/notifications.component';
@@ -23,7 +23,7 @@ export class ExpenseDetailComponent implements OnInit {
   expenseId: string = this.route.snapshot.params.id?this.route.snapshot.params.id:"";
   action: string = "";
   updateExpenseResponse = new StandardResponse() ;
-  constructor(private dataService:DataService, private route:ActivatedRoute, private notis: NotificationsComponent) {
+  constructor(private router:Router,private dataService:DataService, private route:ActivatedRoute, private notis: NotificationsComponent) {
     this.updateExpenseResponse.msg = "";
   }
 
@@ -54,6 +54,7 @@ export class ExpenseDetailComponent implements OnInit {
           this.updateExpenseResponse = data;
           if(this.updateExpenseResponse.msg == 'OK'){
             this.notis.showNotification('top','right','Add Success','Expense Added Successfully','success','check');
+            this.router.navigate(['/expense-list']);
           }
         },error =>{
           this.notis.showNotification('top','right','Add Fail','Expense Add Failure','danger','cancel');

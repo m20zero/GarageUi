@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from 'app/data.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StandardResponse } from 'app/Model/StandardResponse';
 import { NotificationsComponent } from 'app/notifications/notifications.component';
 import { Vendor } from 'app/Model/vendor';
@@ -18,7 +18,7 @@ export class VendorDetailComponent implements OnInit {
   vendorId: string = this.route.snapshot.params.id?this.route.snapshot.params.id:"";
   action: string = "";
   updateVendorResponse = new StandardResponse() ;
-  constructor(private dataService:DataService, private route:ActivatedRoute, private notis: NotificationsComponent) {
+  constructor(private router:Router, private dataService:DataService, private route:ActivatedRoute, private notis: NotificationsComponent) {
     this.updateVendorResponse.msg = "";
   }
 
@@ -62,6 +62,7 @@ export class VendorDetailComponent implements OnInit {
           this.updateVendorResponse = data;
           if(this.updateVendorResponse.msg == 'OK'){
             this.notis.showNotification('top','right','Add Success','Vendor Added Successfully','success','check');
+            this.router.navigate(['/vendor-list']);
           }
         },error =>{
           this.notis.showNotification('top','right','Add Fail','Vendor Add Failure','danger','cancel');

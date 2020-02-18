@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from 'app/data.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StandardResponse } from 'app/Model/StandardResponse';
 import { NotificationsComponent } from 'app/notifications/notifications.component';
 import { Job } from 'app/Model/job';
@@ -29,7 +29,7 @@ export class JobDetailComponent implements OnInit {
   jobId: string = this.route.snapshot.params.id?this.route.snapshot.params.id:"";
   action: string = "";
   updateJobResponse = new StandardResponse() ;
-  constructor(private dataService:DataService, private route:ActivatedRoute, private notis: NotificationsComponent) {
+  constructor(private router:Router,private dataService:DataService, private route:ActivatedRoute, private notis: NotificationsComponent) {
     this.updateJobResponse.msg = "";
   }
 
@@ -59,21 +59,78 @@ export class JobDetailComponent implements OnInit {
     }
   }
 
-  invalidForm(){
+  invalidName(){
     var nameRegex = /^[A-Za-z ]+$/;
-    var numRegex = /^((\+)?(\d{2}[-]))?(\d{10,15}){1}?$/;
+    if( this.job$.customerName.trim().length <=0 || 
+        !this.job$.customerName.match(nameRegex) 
+      ){
+      return true;
+    }
+    return false;
+  }
+
+  invalidEmail(){
+    var emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if( this.job$.customerEmail.trim().length <= 0 || 
+        !this.job$.customerEmail.match(emailRegex)
+      ){
+      return true;
+    }
+    return false;
+  }
+
+  invalidPhone(){
+    var numRegex = /^((\+)?(\d{2}[-]))?(\d{8,15}){1}?$/;
+    if(
+      (this.job$.customerPhone+"").trim().length <= 0 ||   
+      !(this.job$.customerPhone+"").match(numRegex)
+      ){
+        return true;
+    }
+    return false;
+  }
+
+  invalidAddress(){
+    if(this.job$.customerAddress.trim().length <= 0){
+      return true;
+    }
+    return false;
+  }
+
+  invalidCarNo(){
+    if(this.job$.carNo.trim().length <= 0){
+      return true;
+    }
+    return false;
+  }
+
+  invalidBill(){
     var numbersOnlyRegex = /^[0-9]*$/;
+    if(!(this.job$.bill+"").match(numbersOnlyRegex)){
+      return true;
+    }
+    return false;
+  }
+
+  invalidEndDate(){
+    if(this.job$.jobStartDate > this.job$.jobEndDate){
+      return true;
+    }
+    return false;
+  }
+
+  invalidForm(){
+    
     
     if(
-      this.job$.customerName.trim().length <=0 ||
-      this.job$.customerEmail.trim().length <= 0 || 
-      (this.job$.customerPhone+"").trim().length <= 0 ||
-      this.job$.customerAddress.trim().length <= 0 ||
-      !(this.job$.bill+"").match(numbersOnlyRegex) ||
-      this.job$.carNo.trim().length <= 0 ||
-      this.job$.jobStartDate > this.job$.jobEndDate ||
-      !this.job$.customerName.match(nameRegex) || 
-      !this.job$.customerPhone.match(numRegex)){
+      this.invalidName() || 
+      this.invalidEmail() || 
+      this.invalidPhone() ||
+      this.invalidAddress() || 
+      this.invalidCarNo() || 
+      this.invalidBill() || 
+      this.invalidEndDate()
+      ){
       return true;
     }
     
@@ -98,6 +155,7 @@ export class JobDetailComponent implements OnInit {
           this.updateJobResponse = data;
           if(this.updateJobResponse.msg == 'OK'){
             this.notis.showNotification('top','right','Add Success','Job Added Successfully','success','check');
+            this.router.navigate(['/job-list']);
           }
         },error =>{
           this.notis.showNotification('top','right','Add Fail','Job Add Failure','danger','cancel');

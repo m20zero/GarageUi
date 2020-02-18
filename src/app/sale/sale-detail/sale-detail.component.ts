@@ -189,18 +189,18 @@ export class SaleDetailComponent implements OnInit {
       for(var i=0;i<this.currentSaleData.length;i++){
         
         if(this.oldQty[i]==undefined){
-          this.tempInventoryList[i].itemQty = this.tempInventoryList[i].itemQty*1  - this.currentSaleData[i].qty*1;
+          this.tempInventoryList[i].itemQty = this.tempInventoryList[i].itemQty*1 - this.currentSaleData[i].qty*1;
         }else{
           this.tempInventoryList[i].itemQty = this.tempInventoryList[i].itemQty*1 + this.oldQty[i]*1 - this.currentSaleData[i].qty*1;
         }
-        // console.log(this.tempInventoryList[i].itemQty);
+        console.log(this.tempInventoryList[i].itemQty);
         this.dataService.updateInventory(this.tempInventoryList[i]).subscribe(data=>{
           this.updateInventoryResponse = data;
           if(this.updateInventoryResponse.msg == "OK"){
-            // console.log("DONE");
+            console.log("DONE");
           }
         },error=>{
-          // console.log("ERROR");
+          console.log("ERROR");
         })
         this.currentSaleData[i].inventoryId = parseInt(this.currentSaleData[i].someString.split("|")[0].trim());
         this.currentSaleData[i].total = parseInt(this.currentSaleData[i].someString.split("|")[3].trim().split(" ")[2]) * this.currentSaleData[i].qty;
