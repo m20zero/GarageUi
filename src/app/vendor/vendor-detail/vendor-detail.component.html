@@ -18,25 +18,45 @@
                               </div>
                               <div class="col-md-3">
                                   <mat-form-field class="example-full-width">
-                                    <input matInput required placeholder="Name" name="vendor$.vendorName" [(ngModel)]=vendor$.vendorName>
+                                    <input #name="ngModel" matInput required placeholder="Name" name="vendor$.vendorName" [(ngModel)]=vendor$.vendorName>
                                   </mat-form-field>
+                                  <div *ngIf="(name.dirty || name.touched)" class="text-danger">
+                                    <div *ngIf="invalidName()">
+                                      Invalid Name.
+                                    </div>
+                                  </div>
                               </div>
                               <div class="col-md-4">
                                   <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Email address" type="email" name="vendor$.vendorEmail" [(ngModel)]=vendor$.vendorEmail>
+                                    <input #email="ngModel" matInput placeholder="Email address" type="email" name="vendor$.vendorEmail" [(ngModel)]=vendor$.vendorEmail>
                                   </mat-form-field>
+                                  <div *ngIf="(email.dirty || email.touched)" class="text-danger">
+                                    <div *ngIf="invalidEmail()">
+                                      Invalid Email.
+                                    </div>
+                                  </div>
                               </div>
                           </div>
                           <div class="row">
                               <div class="col-md-6">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput required placeholder="Phone" type="number" name="vendor$.vendorPhone" [(ngModel)]=vendor$.vendorPhone>
+                                  <input #phone="ngModel" matInput required placeholder="Phone" type="number" name="vendor$.vendorPhone" [(ngModel)]=vendor$.vendorPhone>
                                 </mat-form-field>
+                                <div *ngIf="(phone.dirty || phone.touched)" class="text-danger">
+                                    <div *ngIf="invalidPhone()">
+                                      Invalid Phone.
+                                    </div>
+                                  </div>
                               </div>
                               <div class="col-md-6">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput required placeholder="Address" type="test" name="vendor$.vendorAddress" [(ngModel)]="vendor$.vendorAddress">
+                                  <input #address="ngModel" matInput required placeholder="Address" type="test" name="vendor$.vendorAddress" [(ngModel)]="vendor$.vendorAddress">
                                 </mat-form-field>
+                                <div *ngIf="(address.dirty || address.touched)" class="text-danger">
+                                    <div *ngIf="invalidAddress()">
+                                      Invalid Address.
+                                    </div>
+                                  </div>
                               </div>
                           </div>
                           <div class="row">

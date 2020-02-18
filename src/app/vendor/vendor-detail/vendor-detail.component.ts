@@ -38,18 +38,45 @@ export class VendorDetailComponent implements OnInit {
     }
   }
 
-  invalidForm(){
+  invalidName(){
     var nameRegex = /^[A-Za-z ]+$/;
-    var numRegex = /^((\+)?(\d{2}[-]))?(\d{10,15}){1}?$/;
+    if(this.vendor$.vendorName.trim() == "" || !this.vendor$.vendorName.match(nameRegex) ){
+      return true;
+    }
+    return false;
+  }
+
+  invalidEmail(){
     var emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(this.vendor$.vendorEmail.trim()== "" || !this.vendor$.vendorEmail.match(emailRegex)){
+      return true;
+    }
+    return false;
+  }
+
+  invalidAddress(){
     
+    if(this.vendor$.vendorAddress.trim()== "" ){
+      return true;
+    }
+    return false;
+  }
+
+  invalidPhone(){
+    var numRegex = /^((\+)?(\d{2}[-]))?(\d{8,15}){1}?$/;
+    if((""+this.vendor$.vendorPhone).trim()== "" || 
+    !(this.vendor$.vendorPhone+"").match(numRegex)){
+      return true;
+    }
+    return false;
+  }
+
+  invalidForm(){
     if(
-      this.vendor$.vendorName.trim() == "" || 
-      this.vendor$.vendorEmail.trim()== "" || 
-      (""+this.vendor$.vendorPhone).trim()== "" || 
-      !(this.vendor$.vendorPhone+"").match(numRegex) || 
-      !this.vendor$.vendorEmail.match(emailRegex) ||
-      !this.vendor$.vendorName.match(nameRegex) 
+        this.invalidName() ||
+        this.invalidEmail() ||
+        this.invalidPhone() ||
+        this.invalidAddress()
       ){
       return true;
     }
