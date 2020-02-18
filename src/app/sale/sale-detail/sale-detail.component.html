@@ -18,47 +18,39 @@
                               </div>
                               <div class="col-md-3">
                                   <mat-form-field class="example-full-width">
-                                    <input matInput required [disabled]="sale$.billed" placeholder="Customer Name" name="sale$.customerName" [(ngModel)]=sale$.customerName>
+                                    <input matInput #name="ngModel" required [disabled]="sale$.billed" placeholder="Customer Name" name="sale$.customerName" [(ngModel)]=sale$.customerName>
                                   </mat-form-field>
+                                  <div *ngIf="(name.dirty || name.touched)" class="text-danger">
+                                    <div *ngIf="invalidCustomerName()">
+                                      Invalid Name.
+                                    </div>
+                                  </div>
                               </div>
                               <div class="col-md-4">
                                   <mat-form-field class="example-full-width">
-                                    <input matInput  [disabled]="sale$.billed" placeholder="Customer Email" type="email" name="sale$.customerEmail" [(ngModel)]=sale$.customerEmail>
+                                    <input #email="ngModel" matInput  [disabled]="sale$.billed" placeholder="Customer Email" type="email" name="sale$.customerEmail" [(ngModel)]=sale$.customerEmail>
                                   </mat-form-field>
+                                  <div *ngIf="(email.dirty || email.touched)" class="text-danger">
+                                    <div *ngIf="invalidCustomerEmail()">
+                                      Invalid Email.
+                                    </div>
+                                  </div>
                               </div>
                           </div>
                           <div class="row">
                               <div class="col-md-4">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput required [disabled]="sale$.billed" placeholder="Customer Phone" type="number" name="sale$.customerPhone" [(ngModel)]=sale$.customerPhone>
+                                  <input #phone="ngModel" matInput required [disabled]="sale$.billed" placeholder="Customer Phone" type="number" name="sale$.customerPhone" [(ngModel)]=sale$.customerPhone>
                                 </mat-form-field>
+                                <div *ngIf="(phone.dirty || phone.touched)" class="text-danger">
+                                  <div *ngIf="invalidCustomerPhone()">
+                                    Invalid Phone.
+                                  </div>
+                                </div>
                               </div>
                               
                           </div>
-                          <!-- <div class="row">
-                              <div class="col-md-12">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Address" type="text">
-                                </mat-form-field>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="City" type="text">
-                                </mat-form-field>
-                              </div>
-                              <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Country" type="text">
-                                </mat-form-field>
-                              </div>
-                              <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Postal Code" type="text">
-                                </mat-form-field>
-                              </div>
-                          </div> -->
+                          
                           <div class="row">
                               <div class="col-md-4">
                                 <label>Sale Date</label>
@@ -117,9 +109,14 @@
                                     </div>
                                     <div class="col-md-2">
                                       <mat-form-field class="example-full-width">
-                                        <input (focus)="getOldQty(i)" required [disabled]="sale$.billed" (change)="onQtyChange()" matInput placeholder="Qty" type="number" name="invItemQty{{i}}" [(ngModel)]="obj.qty">
+                                        <input #qty="ngModel" (focus)="getOldQty(i)" required [disabled]="sale$.billed" (change)="onQtyChange()" matInput placeholder="Qty" type="number" name="invItemQty{{i}}" [(ngModel)]="obj.qty">
                                       </mat-form-field>
-                                      <!-- <label>hi</label> -->
+                                      <div *ngIf="(qty.dirty || qty.touched)" class="text-danger">
+                                        <div *ngIf="invalidQty()">
+                                          Invalid Quantity.
+                                        </div>
+                                      </div>
+                                      
                                       <button  [disabled]="sale$.billed" mat-raised-button class="btn btn-danger pull-left" (click)="onRemoveDiv(i)">X</button>
                                     </div>
                                   </div>
@@ -132,15 +129,24 @@
                           <div class="row">
                             <div class="col-md-3">
                               <mat-form-field class="example-full-width">
-                                <input min="0" required [disabled]="sale$.billed" (change)="onQtyChange(0)" matInput placeholder="Discount" type="number" name="sale$.discount" [(ngModel)]=sale$.discount >
-                                	
+                                <input #disc="ngModel" min="0" required [disabled]="sale$.billed" (change)="onQtyChange(0)" matInput placeholder="Discount" type="number" name="sale$.discount" [(ngModel)]=sale$.discount >                                	
                               </mat-form-field>
+                              <div *ngIf="(disc.dirty || disc.touched)" class="text-danger">
+                                <div *ngIf="invalidDiscount()">
+                                  Invalid Discount.
+                                </div>
+                              </div>
 
                             </div>
                             <div class="col-md-3">
                               <mat-form-field class="example-full-width">
-                                <input min="0" required [disabled]="sale$.billed" matInput placeholder="Total" type="number" name="sale$.saleTotal" [(ngModel)]=sale$.saleTotal>
+                                <input #total="ngModel" min="0" required [disabled]="sale$.billed" matInput placeholder="Total" type="number" name="sale$.saleTotal" [(ngModel)]=sale$.saleTotal>
                               </mat-form-field>
+                              <div *ngIf="(total.dirty || total.touched)" class="text-danger">
+                                <div *ngIf="invalidTotal()">
+                                  Invalid Discount.
+                                </div>
+                              </div>
                             </div>
                         </div>
                         <!-- <button mat-raised-button class="btn btn-danger pull-right" >Bill</button> -->

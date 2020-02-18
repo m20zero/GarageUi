@@ -103,25 +103,75 @@ export class SaleDetailComponent implements OnInit {
     );
   }
 
-  invalidForm(){
-    var numRegex = /^((\+)?(\d{2}[-]))?(\d{10,15}){1}?$/;
-    var nameRegex = /^[A-Za-z ]+$/;
-    var emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  invalidDiscount(){
+    var numbersOnlyRegex = /^[0-9]*$/;
     if(
-      this.sale$.discount < 0 || 
-      this.sale$.customerName.trim().length <= 0 || 
-      !this.sale$.customerName.match(nameRegex) ||
-      !(this.sale$.customerPhone+"").match(numRegex) ||
-      !this.sale$.customerEmail.match(emailRegex))
-      {
+        this.sale$.discount < 0 ||
+        !(this.sale$.discount+"").match(numbersOnlyRegex) ||
+        (this.sale$.discount+"").trim()==""
+      ){
       return true;
     }
+    return false;
+  }
+
+  invalidTotal(){
+    var numbersOnlyRegex = /^[0-9]*$/;
+    if(
+        this.sale$.saleTotal < 0 ||
+        !(this.sale$.saleTotal+"").match(numbersOnlyRegex) ||
+        (this.sale$.saleTotal+"").trim()==""
+      ){
+      return true;
+    }
+    return false;
+  }
+
+  invalidCustomerName(){
+    var nameRegex = /^[A-Za-z ]+$/;
+    if(this.sale$.customerName.trim().length <= 0 || 
+    !this.sale$.customerName.match(nameRegex)){
+      return true;
+    }
+    return false;
+  }
+  invalidCustomerPhone(){
+    var numRegex = /^((\+)?(\d{2}[-]))?(\d{8,15}){1}?$/;
+    if(!(this.sale$.customerPhone+"").match(numRegex) || (this.sale$.customerPhone+"").trim()==""){
+      return true;
+    }
+    return false;
+  }
+  invalidCustomerEmail(){
+    var emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(!this.sale$.customerEmail.match(emailRegex) ){
+      return true;
+    }
+    return false;
+  }
+
+  invalidQty(){
     for(var i=0;i<this.currentSaleData.length;i++){
       var tempQty = this.currentSaleData[i].someString.split("|")[2].split("=")[1].trim();
       if(this.currentSaleData[i].qty <= 0 || this.currentSaleData[i].qty > parseInt(tempQty)){
         return true;
       }
     }
+  }
+
+  invalidForm(){   
+    if(
+      this.invalidDiscount() ||
+      this.invalidTotal() ||
+      this.invalidCustomerName() ||
+      this.invalidCustomerPhone() ||
+      this.invalidCustomerEmail() ||
+      this.invalidQty()
+      )
+      {
+      return true;
+    }
+    
   }
 
   print(saleId:string){

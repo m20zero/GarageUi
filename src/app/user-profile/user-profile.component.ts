@@ -60,7 +60,12 @@ export class UserProfileComponent implements OnInit {
   }
 
   invalidSalary(){
-    if(this.worker$.workerSalary <= 0){
+    var numbersOnlyRegex = /^[0-9]*$/;
+    if(
+        this.worker$.workerSalary <= 0 || 
+        !(this.worker$.workerSalary+"").match(numbersOnlyRegex) ||
+        (this.worker$.workerSalary+"").trim()==""
+      ){
       return true;
     }
     return false;
