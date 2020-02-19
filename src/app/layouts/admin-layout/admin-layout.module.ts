@@ -42,6 +42,7 @@ import { BillListComponent } from 'app/bill/bill-list/bill-list.component';
 import { BillDetailComponent } from 'app/bill/bill-detail/bill-detail.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { JobCardListComponent } from 'app/jobcard/jobcard-list/jobcard-list.component';
+import { JobCardDetailComponent } from 'app/jobcard/jobcard-detail/jobcard-detail.component';
 
 @NgModule({
   imports: [
@@ -63,6 +64,7 @@ import { JobCardListComponent } from 'app/jobcard/jobcard-list/jobcard-list.comp
     Ng2SearchPipeModule
   ],
   declarations: [
+    JobCardDetailComponent,
     JobCardListComponent,
     BillListComponent,
     BillDetailComponent,

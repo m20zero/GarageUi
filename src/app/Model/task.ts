@@ -3,5 +3,5 @@ export class Task{
 	taskDescription: string = "";
 	workerId: number;
 	taskTotal: number;
-
+	someString: string="";
 }

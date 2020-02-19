@@ -1,0 +1,225 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger" >
+                    <h3 class="card-title "><b>{{this.action}} Job Card</b></h3>
+                    <h4 class="card-category"><b> Job Card Data </b></h4>
+                  </div>
+                  <div class="card-body">
+                      <form #jobCardForm="ngForm">
+                          <div class="row">
+                              <div class="col-md-1">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Job Card Id" value={{jobCard$.jobId}} disabled>
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-3">
+                                  <mat-form-field class="example-full-width">
+                                    <input #name="ngModel" required matInput placeholder="Customer Name" name="jobCard$.customerName" [(ngModel)]=jobCard$.customerName>
+                                  </mat-form-field>
+                                  <div *ngIf="(name.dirty || name.touched)" class="text-danger">
+                                    <div *ngIf="invalidName()">
+                                      Invalid Name.
+                                    </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-3">
+                                  <mat-form-field class="example-full-width">
+                                    <input #email="ngModel" matInput required placeholder="Customer Email" type="email" name="jobCard$.customerEmail" [(ngModel)]=jobCard$.customerEmail>
+                                  </mat-form-field>
+                                  <div *ngIf="(email.dirty || email.touched)" class="text-danger">
+                                    <div *ngIf="invalidEmail()">
+                                      Invalid Email.
+                                    </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-2">
+                                <mat-form-field class="example-full-width">
+                                  <input #phone="ngModel" matInput required placeholder="Customer Phone" type="number" name="jobCard$.customerPhone" [(ngModel)]=jobCard$.customerPhone>
+                                </mat-form-field>
+                                <div *ngIf="(phone.dirty || phone.touched)" class="text-danger">
+                                  <div *ngIf="invalidPhone()">
+                                    Invalid Phone.
+                                  </div>
+                                </div>
+                                
+                              </div>
+                              <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                  <input #address="ngModel" matInput required placeholder="Customer Address" type="text" name="jobCard$.customerAddress" [(ngModel)]="jobCard$.customerAddress">
+                                </mat-form-field>
+                                <div *ngIf="(address.dirty || address.touched)" class="text-danger">
+                                  <div *ngIf="invalidAddress()">
+                                    Invalid Address.
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-2">
+                                <mat-form-field class="example-full-width">
+                                  <input #carno="ngModel" matInput required placeholder="Car No" type="text" name="jobCard$.carNo" [(ngModel)]="jobCard$.carNo">
+                                </mat-form-field>
+                                <div *ngIf="(carno.dirty || carno.touched)" class="text-danger">
+                                  <div *ngIf="invalidCarNo()">
+                                    Invalid Car No.
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-2">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Car Brand" type="text" name="jobCard$.carBrand" [(ngModel)]="jobCard$.carBrand">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-2">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Car Model" type="text" name="jobCard$.carModel" [(ngModel)]="jobCard$.carModel">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-2">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Car KM" type="text" name="jobCard$.carKM" [(ngModel)]="jobCard$.carKM">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-2">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Car Chais No" type="text" name="jobCard$.carChasisNo" [(ngModel)]="jobCard$.carChasisNo">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-2">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Car Engine No" type="text" name="jobCard$.carEngineNo" [(ngModel)]="jobCard$.carEngineNo">
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-2">
+                                  <mat-form-field >
+                                    <input type="text" placeholder="Fuel Type" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                                    <mat-autocomplete #auto="matAutocomplete">
+                                      <mat-option *ngFor="let option of options" [value]="option" name="jobCard$.carFuelType" [(ngModel)]="jobCard$.carFuelType">
+                                        {{option}}
+                                      </mat-option>
+                                    </mat-autocomplete>
+                                  </mat-form-field>
+                            </div>
+                            
+                            <div class="col-md-2">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Fuel Level" type="number" name="jobCard$.carFuel" [(ngModel)]="jobCard$.carFuel">    
+                              </mat-form-field>
+                            </div>
+                                <mat-slider
+                                  placeholder="Fuel Level"
+                                  name="jobCard$.carFuel" 
+                                  [(ngModel)]="jobCard$.carFuel"
+                                  thumbLabel
+                                  tickInterval="5"
+                                  min="0"
+                                  max="100"></mat-slider>
+                                  
+                            </div>
+                          
+                            
+                          
+
+                          <div class="row">
+                            <div class="col-md-6">
+                              <label>Start Date</label>
+                              <mat-form-field class="example-full-width">
+                                <input matInput required type="date" name="jobCard$.jobStartDate" [(ngModel)]="jobCard$.jobStartDate">
+                               </mat-form-field> 
+                            </div>
+
+                            <div class="col-md-6">
+                              <label>End Date</label>
+                              <mat-form-field class="example-full-width">
+                                <input #endDate="ngModel" matInput type="date" name="jobCard$.jobEndDate" [(ngModel)]="jobCard$.jobEndDate">
+                               </mat-form-field> 
+                               <div *ngIf="(endDate.dirty || endDate.touched)" class="text-danger">
+                                <div *ngIf="invalidEndDate()">
+                                  Invalid End Date.
+                                </div>
+                              </div>
+                            </div>
+
+                            <!-- ======= -->
+                            <div class="col-md-12"><hr></div>
+                            <div class="col-md-12" >
+                              <mat-accordion>
+                                <mat-expansion-panel>
+                                  <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                      Task Information
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+                                      Add Task
+                                    </mat-panel-description>
+                                  </mat-expansion-panel-header>
+                                  <div *ngFor="let obj of currentTasksList; let i=index">
+                                    <div class="col-md-12">
+                                      <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Task Detail" type="text" name="taskDesc{{i}}" [(ngModel)]="obj.taskDescription">
+                                      </mat-form-field>
+                                    </div>
+                                  <div class="col-md-5">
+                                    <mat-form-field >
+                                      <input type="text" placeholder="Worker" aria-label="Number" matInput name="someString{{i}}" [(ngModel)]="obj.someString" [matAutocomplete]="autoTest2">
+                                      <mat-autocomplete #autoTest2="matAutocomplete">
+                                        <mat-option *ngFor="let option of workerOptions" [value]="option" >
+                                          {{option}}
+                                        </mat-option>
+                                      </mat-autocomplete>
+                                    </mat-form-field>
+                                  </div>
+                                  
+                                  <div class="col-md-2">
+                                    <mat-form-field class="example-full-width">
+                                      <input matInput (change)="onTaskPrice()" placeholder="Task Amount" type="number" name="taskTotal{{i}}" [(ngModel)]="obj.taskTotal">
+                                    </mat-form-field>
+                                    
+                                    <button mat-raised-button class="btn btn-danger pull-left" (click)="onRemoveDiv(i)">X</button>
+                                  </div>
+                                </div>
+                                  <button mat-raised-button class="btn btn-success pull-left" (click)="onAddDiv()">+</button>
+                                </mat-expansion-panel></mat-accordion>
+                            </div>
+                            <div class="col-md-12"><hr></div>
+
+                            <!-- ======= -->
+                                
+                                
+                                <div class="col-md-2">
+                                  
+                                    <mat-form-field >
+                                      <input type="text" placeholder="Job Status" aria-label="Number" matInput [formControl]="myControl1" [matAutocomplete]="autoTest">
+                                      <mat-autocomplete required #autoTest="matAutocomplete">
+                                        <mat-option *ngFor="let option of jobStatusOptions" [value]="option" name="jobCard$.status" [(ngModel)]="jobCard$.status">
+                                          {{option}}
+                                        </mat-option>
+                                      </mat-autocomplete>
+                                    </mat-form-field>
+                              
+                                </div>
+                                <div class="col-md-2">
+                                  <mat-form-field class="example-full-width">
+                                    <input #bill="ngModel" matInput  placeholder="Total Bill" type="number" name="jobCard$.total" [(ngModel)]=jobCard$.total>
+                                  </mat-form-field>
+                                  <div *ngIf="(bill.dirty || bill.touched)" class="text-danger">
+                                    <div *ngIf="invalidBill()">
+                                      Invalid Bill Amount.
+                                    </div>
+                                  </div>
+                                </div>
+                                  
+                          </div>
+                          <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="onUpdate()" [disabled]="jobCardForm.invalid || invalidForm()">{{this.action}} Job Card</button>
+                          <div class="clearfix"></div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+          
+      </div>
+  </div>
+</div>

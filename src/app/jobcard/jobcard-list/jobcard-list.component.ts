@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'app/data.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Job } from 'app/Model/job';
 import { JobCard } from 'app/Model/jobcard';
 
 @Component({

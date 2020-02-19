@@ -149,7 +149,6 @@
                               </div>
                             </div>
                         </div>
-                        <!-- <button mat-raised-button class="btn btn-danger pull-right" >Bill</button> -->
                         <button mat-raised-button [disabled]="saleForm.invalid || invalidForm()" *ngIf="!sale$.billed && action=='Update'" class="btn btn-danger pull-right" (click)="print(sale$.saleId)">Bill</button>
                         <button mat-raised-button [disabled]="!saleForm.dirty || saleForm.invalid || invalidForm()" *ngIf="!sale$.billed" type="submit" class="btn btn-danger pull-right" (click)="onUpdate()">{{this.action}} Sale</button>
                         <button mat-raised-button *ngIf="sale$.billed" type="submit" class="btn btn-danger pull-right" (click)="bill(sale$.saleId)">Check Bill</button>

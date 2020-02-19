@@ -93,7 +93,6 @@ export class SaleDetailComponent implements OnInit {
               });
 
               loadSalesData(this.oldQty,this.currentSaleData,this.dataService).then(()=>{
-                // console.log(this.oldQty);
                 this.isLoading = false;
               })
             }
@@ -170,8 +169,7 @@ export class SaleDetailComponent implements OnInit {
       )
       {
       return true;
-    }
-    
+    }    
   }
 
   print(saleId:string){
@@ -307,7 +305,6 @@ async function loadSalesData(oldQty:number[],currentSaleData: SaleData[],dataSer
         dataService.getInventory(currentSaleData[i].inventoryId+"").subscribe(
           data=>{
             tempInv = data;
-            // this.tempInventoryList.push(tempInv);
             tempS=tempInv.id + " | " + tempInv.itemName + " | Avl. Qty = " + tempInv.itemQty + " | Price = " + tempInv.itemSellingPrice;
             currentSaleData[i-1].someString = tempS;
             oldQty[i-1]=currentSaleData[i-1].qty;
