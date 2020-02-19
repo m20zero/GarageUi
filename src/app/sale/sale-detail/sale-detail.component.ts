@@ -8,6 +8,7 @@ import { Job } from 'app/Model/job';
 import { FormControl } from '@angular/forms';
 import { SaleData } from 'app/Model/saledata';
 import { Inventory } from 'app/Model/inventory'; 
+import { JobCard } from 'app/Model/jobcard';
 
 @Component({
   selector: 'app-sale-detail',
@@ -16,7 +17,6 @@ import { Inventory } from 'app/Model/inventory';
 })
 
 export class SaleDetailComponent implements OnInit {
-
 
   isPrinting: boolean = false;
   tempInventoryList : Inventory[] = [];
@@ -36,8 +36,8 @@ export class SaleDetailComponent implements OnInit {
   myControl1 = new FormControl();
   jobOptions: string[]=[];
   itemOptions: string[]=[];
-  currentJob: Job = new Job();
-  jobs: Job[] = [];
+  currentJobCard: JobCard = new JobCard();
+  jobCards: JobCard[] = [];
   inventory: Inventory[] = [];
   sale$: Sale = new Sale();
   tempString: string="";
@@ -61,11 +61,11 @@ export class SaleDetailComponent implements OnInit {
       }
     );
 
-    this.dataService.getJobs().subscribe(
+    this.dataService.getJobCards().subscribe(
       data => {
-        this.jobs = data;
-        this.jobs.forEach(element => {
-          this.tempString = element.jobId + " | " + element.jobDescription + " | " + element.jobStartDate + " | " + element.bill;
+        this.jobCards = data;
+        this.jobCards.forEach(element => {
+          this.tempString = element.jobId + " | " + element.description + " | " + element.jobStartDate + " | " + element.total;
           this.jobOptions.push(this.tempString);
         });
         if(this.saleId == ""){
@@ -79,15 +79,15 @@ export class SaleDetailComponent implements OnInit {
               this.sale$ = data;
               this.currentSaleData = this.sale$.saleData;
               this.action = "Update";
-              this.jobs.forEach(element => {
+              this.jobCards.forEach(element => {
                 if(this.sale$.jobId == element.jobId){
-                  this.currentJob = element;
+                  this.currentJobCard = element;
                   if(this.sale$.billed){
-                    this.myControl = new FormControl({value: element.jobId + " | " + element.jobDescription + " | " + element.jobStartDate + " | " + element.bill, disabled: true});
+                    this.myControl = new FormControl({value: element.jobId + " | " + element.description + " | " + element.jobStartDate + " | " + element.total, disabled: true});
                   }else{
-                    this.myControl = new FormControl({value: element.jobId + " | " + element.jobDescription + " | " + element.jobStartDate + " | " + element.bill, disabled: false});
+                    this.myControl = new FormControl({value: element.jobId + " | " + element.description + " | " + element.jobStartDate + " | " + element.total, disabled: false});
                   }
-                  this.jobTotal = element.bill;
+                  this.jobTotal = element.total;
                 }
               });
 

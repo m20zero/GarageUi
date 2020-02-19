@@ -3,12 +3,12 @@ import { Sale } from 'app/Model/sale';
 import { DataService } from 'app/data.service';
 import { ActivatedRoute } from '@angular/router';
 import { NotificationsComponent } from 'app/notifications/notifications.component';
-import { Job } from 'app/Model/job';
 import { SaleData } from 'app/Model/saledata';
 import { Inventory } from 'app/Model/inventory';
 import { Bill } from 'app/Model/bill';
 import { StandardResponse } from 'app/Model/StandardResponse';
 import { BillLine } from 'app/Model/billline';
+import { JobCard } from 'app/Model/jobcard';
 
 @Component({
   selector: 'app-print',
@@ -24,7 +24,7 @@ export class PrintComponent implements OnInit{
   billLineList: BillLine[]=[];
   addBillResponse: StandardResponse;
   sale$: Sale = new Sale();
-  job: Job = new Job();
+  jobCard: JobCard = new JobCard();
   saleData: SaleData[]=[];
   inventory: Inventory = new Inventory();
   inventoryList: Inventory[]=[];
@@ -40,14 +40,14 @@ export class PrintComponent implements OnInit{
       this.bill.customerName = this.sale$.customerName;
       this.bill.customerPhone = this.sale$.customerPhone;
       this.bill.discount = this.sale$.discount;
-      this.bill.jobDescription = this.job.jobDescription;
-      this.bill.jobId = this.job.jobId;
-      this.bill.jobTotal = this.job.bill;
-      this.bill.jobStartDate = this.job.jobStartDate;
-      this.bill.jobEndDate = this.job.jobEndDate;
-      this.bill.carNo = this.job.carNo;
-      this.bill.carBrand = this.job.carBrand;
-      this.bill.carModel = this.job.carModel;
+      this.bill.jobDescription = this.jobCard.description;
+      this.bill.jobId = this.jobCard.jobId;
+      this.bill.jobTotal = this.jobCard.total;
+      this.bill.jobStartDate = this.jobCard.jobStartDate;
+      this.bill.jobEndDate = this.jobCard.jobEndDate;
+      this.bill.carNo = this.jobCard.carNo;
+      this.bill.carBrand = this.jobCard.carBrand;
+      this.bill.carModel = this.jobCard.carModel;
       this.bill.saleId = this.sale$.saleId;
       this.bill.billLine = this.billLineList;
       this.addBill();
@@ -77,7 +77,7 @@ export class PrintComponent implements OnInit{
 
   async getAllData(){
     this.sale$ = await this.dataService.getSalePromise(this.saleId);
-    this.job = await this.dataService.getJobPromise(this.sale$.jobId+"");
+    this.jobCard = await this.dataService.getJobCardPromise(this.sale$.jobId+"");
     this.saleData = this.sale$.saleData;
     for(var i=0;i<this.saleData.length;i++){
       this.inventory = new Inventory();
