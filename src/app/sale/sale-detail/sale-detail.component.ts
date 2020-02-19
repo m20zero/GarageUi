@@ -8,7 +8,6 @@ import { Job } from 'app/Model/job';
 import { FormControl } from '@angular/forms';
 import { SaleData } from 'app/Model/saledata';
 import { Inventory } from 'app/Model/inventory'; 
-import { error } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-sale-detail',
@@ -18,7 +17,7 @@ import { error } from '@angular/compiler/src/util';
 
 export class SaleDetailComponent implements OnInit {
 
-  formValid:boolean = false;
+
   isPrinting: boolean = false;
   tempInventoryList : Inventory[] = [];
   oldQty:number[]=[];

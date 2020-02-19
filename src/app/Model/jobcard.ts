@@ -16,6 +16,7 @@ export class JobCard{
 	customerPhone: string="";
 	customerEmail: string="";
 	customerAddress: string="";
+	description: string="";
 	status: string="";
     total: number=0;
     task: Task[]=[];
