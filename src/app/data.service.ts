@@ -12,6 +12,7 @@ import { Sale } from './Model/sale';
 import { Authority } from './Model/authority';
 import { AppGlobals } from './global';
 import { Bill } from './Model/bill';
+import { JobCard } from './Model/jobcard';
 
 @Injectable({
   providedIn: 'root'
@@ -210,5 +211,35 @@ export class DataService {
 
   addBill(bill: Bill):Observable<StandardResponse>{
     return this._http.post<StandardResponse>(this.apiUrl + `api/bills/`,bill);
+  }
+
+  //JOBCARD
+
+  getJobCards(){
+    return this._http.get<JobCard[]>(this.apiUrl+'api/jobcards');
+  }
+
+  getCompletedJobCards(){
+    return this._http.get<JobCard[]>(this.apiUrl+'api/jobcards/Completed');
+  }
+
+  getPendingJobCards(){
+    return this._http.get<JobCard[]>(this.apiUrl+'api/jobcards/Pending');
+  }
+
+  getJobCard(jobId: string){
+    return this._http.get<JobCard>(this.apiUrl + `api/jobcard/${jobId}`);
+  }
+
+  getJobCardPromise(jobId: string){
+    return this._http.get<JobCard>(this.apiUrl + `api/jobcard/${jobId}`).toPromise();
+  }
+
+  updateJobCard(jobCard: JobCard):Observable<StandardResponse>{ 
+    return this._http.put<StandardResponse>(this.apiUrl + `api/jobcards/`,jobCard);
+  }
+
+  addJobCard(jobCard: JobCard):Observable<StandardResponse>{
+    return this._http.post<StandardResponse>(this.apiUrl + `api/jobcards/`,jobCard);
   }
 }

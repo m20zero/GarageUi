@@ -22,6 +22,7 @@ import { PrintComponent } from 'app/print/print.component';
 import { AuthGaurdService } from '../../auth-gaurd.service';
 import { BillListComponent } from 'app/bill/bill-list/bill-list.component';
 import { BillDetailComponent } from 'app/bill/bill-detail/bill-detail.component';
+import { JobCardListComponent } from 'app/jobcard/jobcard-list/jobcard-list.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -70,6 +71,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'user-profile',   component: UserProfileComponent,canActivate:[AuthGaurdService] },
     { path: 'user-profile/:id',   component: UserProfileComponent,canActivate:[AuthGaurdService] },
     { path: 'table-list',     component: TableListComponent ,canActivate:[AuthGaurdService]},
+    { path: 'jobcard-list',     component: JobCardListComponent,canActivate:[AuthGaurdService] },
     { path: 'job-list',     component: JobListComponent,canActivate:[AuthGaurdService] },
     { path: 'job-list/:status',     component: JobListComponent,canActivate:[AuthGaurdService] },
     { path: 'job-detail',     component: JobDetailComponent,canActivate:[AuthGaurdService] },
